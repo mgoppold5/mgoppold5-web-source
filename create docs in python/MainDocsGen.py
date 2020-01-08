@@ -283,6 +283,9 @@ def bodyGen():
 	os.system("cp"
 		+ " picts/Debian-Installer-Disks-Partition-Strategy.png"
 		+ " docs/help/debian")
+	os.system("cp"
+		+ " picts/Debian-Installer-Disks-Manual.png"
+		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
 	myStr = myCat2(myStr, listItemWrap(
@@ -293,6 +296,123 @@ def bodyGen():
 	myStr = myCat2(myStr, listItemWrap(
 		imageWrap("Debian-Installer-Disks-Partition-Strategy.png",
 			"Debian Installer Disks Partition Strategy Form", 400, 300)))
+	myStr = myCat2(myStr, listItemWrap(
+		"<p>This is box in which to configure partitions." + LINE_RETURN
+		+ " It can take a while to get used to these partition forms.</p>" + LINE_RETURN
+		+ "<p>Partition 1." + LINE_RETURN
+		+ "It's good to have a large partition for only your personal files." + LINE_RETURN
+		+ "This includes large application specific files." + LINE_RETURN
+		+ "Keeping them seperate from an operating system partition," + LINE_RETURN
+		+ "means that you can re-install the operating system partition" + LINE_RETURN
+		+ "if you need to." + LINE_RETURN
+		+ "I recommend <b>100 GB</b> for the size.</p>" + LINE_RETURN
+		+ "<p>Partition 2." + LINE_RETURN
+		+ "With the big files on your main partition," + LINE_RETURN
+		+ "the os partition can be small." + LINE_RETURN
+		+ "Configure it with a filesystem of <b>ext4</b>, and a mount point of <b>/</b>." + LINE_RETURN
+		+ "I recommend <b>20 GB</b> for the size." + LINE_RETURN
+		+ "Sometimes you can be ok with <b>10 GB</b>.</p>" + LINE_RETURN
+		+ "<p>Partition 3.  (UEFI only.)" + LINE_RETURN
+		+ "If, and only if, you're installing with UEFI," + LINE_RETURN
+		+ "configure a partition of type <b>EFI System partition</b> with a size of <b>1 GB</b>.</p>" + LINE_RETURN
+		+ "<p>Partition 4.  (Unnecessary)." + LINE_RETURN
+		+ "You dont need swap if you have enough DRAM memory." + LINE_RETURN
+		+ "But if you decide to configure a swap paration," + LINE_RETURN
+		+ "I recommend a size of <b>1 GB</b>.</p>" + LINE_RETURN
+		+ "<p>After done, select <b>Finish partitioning and write changes to disk</b>," + LINE_RETURN
+		+ "and click <b>Continue</b>.</p>" + LINE_RETURN))
+	myStr = myCat2(myStr, listItemWrap(
+		imageWrap("Debian-Installer-Disks-Manual.png",
+			"Debian Installer Disks Manual Configuration", 400, 300)))
+	myStr = appendListEnd(myStr)
+
+	myStr = myCat2(myStr, listItemWrap(
+		"Fill out the debian installer forms for extra stuff"))
+
+	os.system("cp"
+		+ " picts/Debian-Installer-Popularity.png"
+		+ " docs/help/debian")
+
+	myStr = appendListBegin(myStr)
+	myStr = myCat2(myStr, listItemWrap(
+		"<p>This form can enable the popularity contest for packages." + LINE_RETURN
+		+ "If you select <b>Yes</b>, then Debian will send the list" + LINE_RETURN
+		+ "of packages you have installed to their servers." + LINE_RETURN
+		+ "The Debian people use this information to order packages on their CD-s." + LINE_RETURN
+		+ "If you're worried about security, select <b>No</b>." + LINE_RETURN
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
+	myStr = myCat2(myStr, listItemWrap(
+		imageWrap("Debian-Installer-Popularity.png",
+			"Debian Installer Popularity Form", 400, 300)))
+	myStr = appendListEnd(myStr)
+
+	myStr = myCat2(myStr, listItemWrap(
+		"Fill out the debian installer forms for software selection"))
+
+	os.system("cp"
+		+ " picts/Debian-Installer-Software-Selection.png"
+		+ " docs/help/debian")
+
+	myStr = appendListBegin(myStr)
+	myStr = myCat2(myStr, listItemWrap(
+		"<p>This form selects which software to install." + LINE_RETURN
+		+ "Select <b>Debian desktop environment</b>," + LINE_RETURN
+		+ "and select <b>Xfce</b>," + LINE_RETURN
+		+ "and de-select everything else." + LINE_RETURN
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
+	myStr = myCat2(myStr, listItemWrap(
+		imageWrap("Debian-Installer-Software-Selection.png",
+			"Debian Installer Software Selection Form", 400, 300)))
+	myStr = appendListEnd(myStr)
+
+	myStr = myCat2(myStr, listItemWrap(
+		"Fill out the debian installer forms related to GRUB (BIOS only)"))
+
+	os.system("cp"
+		+ " picts/Debian-Installer-Grub-1.png"
+		+ " docs/help/debian")
+	os.system("cp"
+		+ " picts/Debian-Installer-Grub-2.png"
+		+ " docs/help/debian")
+
+	myStr = appendListBegin(myStr)
+	myStr = myCat2(myStr, listItemWrap(
+		"<p>Boot Sectors.  (BIOS only.)  Select <b>Yes</b> here" + LINE_RETURN
+		+ "if you want to install the GRUB environment" + LINE_RETURN
+		+ "to your hard drive, including the first sectors." + LINE_RETURN
+		+ "This wipes out whatever other boot loaders that are in place.</p>" + LINE_RETURN
+		+ "<p>Select <b>No</b> here if you have some other mechanism" + LINE_RETURN
+		+ "to load the linux kernel.</p>" + LINE_RETURN
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
+	myStr = myCat2(myStr, listItemWrap(
+		imageWrap("Debian-Installer-Grub-1.png",
+			"Debian Installer Grub Form 1", 400, 300)))
+	myStr = myCat2(myStr, listItemWrap(
+		"<p>Choose drive.  (BIOS only.)" + LINE_RETURN
+		+ "Select the hard drive to write to.</p>" + LINE_RETURN
+		+ "<p>You can select <b>Enter device manually</b>" + LINE_RETURN
+		+ "and specify an arbitrary path string to the drive," + LINE_RETURN
+		+ "if you want to.</p>" + LINE_RETURN
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
+	myStr = myCat2(myStr, listItemWrap(
+		imageWrap("Debian-Installer-Grub-2.png",
+			"Debian Installer Grub Form 2", 400, 300)))
+	myStr = appendListEnd(myStr)
+
+	myStr = myCat2(myStr, listItemWrap(
+		"Finish with the debian installer"))
+
+	os.system("cp"
+		+ " picts/Debian-Installer-Complete.png"
+		+ " docs/help/debian")
+
+	myStr = appendListBegin(myStr)
+	myStr = myCat2(myStr, listItemWrap(
+		"<p>This form marks the end of the debian installer's role.</p>" + LINE_RETURN
+		+ "<p>Click <b>Continue</b> to reboot.</p>" + LINE_RETURN))
+	myStr = myCat2(myStr, listItemWrap(
+		imageWrap("Debian-Installer-Complete.png",
+			"Debian Installer Complete Form", 400, 300)))
 	myStr = appendListEnd(myStr)
 
 	myStr = appendListEnd(myStr)
