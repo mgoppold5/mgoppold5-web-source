@@ -52,7 +52,7 @@ def appendListEnd(outerStuff):
 	return myCat2(outerStuff, "</ul>" + LINE_RETURN)
 
 def imageWrap(imgPath, altText, width, height):
-	imgStr = ("<img class=" + QUOTE + "gray-border" + QUOTE + LINE_RETURN
+	imgStr = ("<img class=" + QUOTE + "pict-preview" + QUOTE + LINE_RETURN
 		+ TAB + "src=" + QUOTE + imgPath + QUOTE + LINE_RETURN
 		+ TAB + "alt=" + QUOTE + altText + QUOTE + LINE_RETURN
 		+ TAB + "style=" + QUOTE
@@ -68,11 +68,13 @@ def imageWrap(imgPath, altText, width, height):
 def mainWrap(contentStr, headerStr, titleStr):
 	leftStr = ("<style"
 		+ " type=" + QUOTE + "text/css" + QUOTE + ">" + LINE_RETURN)
-	middleStr = (".gray-border {" + LINE_RETURN
-		+ TAB + "border-width: 2px;" + LINE_RETURN
-		+ TAB + "border-color: #777;" + LINE_RETURN
-		+ TAB + "border-style: solid;" + LINE_RETURN
-		+ "}" + LINE_RETURN)
+	#middleStr = (".gray-border {" + LINE_RETURN
+	#	+ TAB + "border-width: 2px;" + LINE_RETURN
+	#	+ TAB + "border-color: #777;" + LINE_RETURN
+	#	+ TAB + "border-style: solid;" + LINE_RETURN
+	#	+ "}" + LINE_RETURN)
+	middleStr = (
+		"@import url(docs-style.css);" + LINE_RETURN)
 	rightStr = "</style>" + LINE_RETURN
 	myStr = myCat3(leftStr, middleStr, rightStr)
 
@@ -128,6 +130,10 @@ def bodyGen():
 	myStr = myCat2(myStr, listItemWrap("Boot the cd or usb media"))
 	
 	os.system("mkdir -p docs/help/debian")
+
+	os.system("cp"
+		+ " css/docs-style.css"
+		+ " docs/help/debian")
 	
 	os.system("cp"
 		+ " picts/Debian-Boot-CD-BIOS.png"
