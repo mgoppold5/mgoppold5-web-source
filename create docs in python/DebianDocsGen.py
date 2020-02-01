@@ -45,6 +45,12 @@ def unorderedListWrap(innerStuff):
 def listItemWrap(innerStuff):
 	return myCat3("<li>", innerStuff, "</li>" + LINE_RETURN)
 
+def appendListItemBegin(outerStuff):
+	return myCat2(outerStuff, "<li>" + LINE_RETURN)
+
+def appendListItemEnd(outerStuff):
+	return myCat2(outerStuff, "</li>" + LINE_RETURN)
+
 def appendListBegin(outerStuff):
 	return myCat2(outerStuff, "<ul>" + LINE_RETURN)
 
@@ -60,7 +66,7 @@ def imageWrap(imgPath, altText, width, height):
 			+ " height: " + str(height) + "px;" + QUOTE + LINE_RETURN
 		+ TAB + "/>")
 	
-	leftStr = "<a href=" + QUOTE + imgPath + QUOTE + "/>" + LINE_RETURN
+	leftStr = "<a href=" + QUOTE + imgPath + QUOTE + ">" + LINE_RETURN
 	rightStr = "</a>" + LINE_RETURN
 	myStr = myCat3(leftStr, imgStr, rightStr)
 	return myStr
@@ -79,8 +85,7 @@ def mainWrap(contentStr, headerStr, titleStr):
 	myStr = myCat3(leftStr, middleStr, rightStr)
 
 	leftStr = "<title>" + titleStr + "</title>" + LINE_RETURN
-	headerWrapStr = myCat2(leftStr, myStr)
-	headerWrapStr = myCat2(myStr, headerStr)
+	headerWrapStr = myCat3(leftStr, myStr, headerStr)
 	
 	leftStr = "<head>" + LINE_RETURN
 	rightStr = "</head>" + LINE_RETURN
@@ -127,7 +132,9 @@ def bodyGen():
 	#myStr = "<p>Hi there!</p>" + LINE_RETURN
 	myStr = ""
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap("Boot the cd or usb media"))
+	
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, "Boot the cd or usb media")
 	
 	os.system("mkdir -p docs/help/debian")
 
@@ -143,17 +150,28 @@ def bodyGen():
 		+ " docs/help/debian")
 	
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
-		"If booting from BIOS, hit [ENTER] to choose <b>Graphical Install</b>."))
-	myStr = myCat2(myStr, listItemWrap(
-		imageWrap("Debian-Boot-CD-BIOS.png", "BIOS boot screen", 320, 240)))
-	myStr = myCat2(myStr, listItemWrap(
-		"If booting from UEFI, hit [ENTER] to choose <b>Graphical Install</b>."))
-	myStr = myCat2(myStr, listItemWrap(
-		imageWrap("Debian-Boot-CD-UEFI.png", "UEFI boot screen", 400, 300)))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"If booting from BIOS, hit [ENTER] to choose <b>Graphical Install</b>.")
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		imageWrap("Debian-Boot-CD-BIOS.png", "BIOS boot screen", 320, 240))
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"If booting from UEFI, hit [ENTER] to choose <b>Graphical Install</b>.")
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		imageWrap("Debian-Boot-CD-UEFI.png", "UEFI boot screen", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 	
-	myStr = myCat2(myStr, listItemWrap("Fill out the debian installer language forms"))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"Fill out the debian installer language forms")
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Language-1.png"
@@ -166,24 +184,39 @@ def bodyGen():
 		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
-		"Choose <b>English</b> in the list box, and click <b>Continue</b>."))
-	myStr = myCat2(myStr, listItemWrap(
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"Choose <b>English</b> in the list box, and click <b>Continue</b>.")
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Language-1.png",
-			"Debian Installer Language Form 1", 400, 300)))
-	myStr = myCat2(myStr, listItemWrap(
-		"Choose <b>United States</b> in the list box, and click <b>Continue</b>."))
-	myStr = myCat2(myStr, listItemWrap(
+			"Debian Installer Language Form 1", 400, 300))
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"Choose <b>United States</b> in the list box, and click <b>Continue</b>.")
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Language-2.png",
-			"Debian Installer Language Form 2", 400, 300)))
-	myStr = myCat2(myStr, listItemWrap(
-		"Choose <b>American English</b> in the list box, and click <b>Continue</b>."))
-	myStr = myCat2(myStr, listItemWrap(
+			"Debian Installer Language Form 2", 400, 300))
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
+		"Choose <b>American English</b> in the list box, and click <b>Continue</b>.")
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Language-3.png",
-			"Debian Installer Language Form 3", 400, 300)))
+			"Debian Installer Language Form 3", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 
-	myStr = myCat2(myStr, listItemWrap("Fill out the debian installer network forms"))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"Fill out the debian installer network forms")
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Network-Hostname.png"
@@ -193,26 +226,37 @@ def bodyGen():
 		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		"<p>A network hostname is the name" + LINE_RETURN
 		+ " which your computer will show on the network." + LINE_RETURN
 		+ " The default in the field is <b>debian</b>, which is just fine.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Network-Hostname.png",
-			"Debian Installer Hostname Form", 400, 300)))
-	myStr = myCat2(myStr, listItemWrap(
+			"Debian Installer Hostname Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		"<p>A network domain name isnt necessary" + LINE_RETURN
 		+ " for client computers for basic Internet access." + LINE_RETURN
 		+ " It is used for servers, or utilized in large networks." + LINE_RETURN
 		+ " The default in the field is a blank, which is just fine.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Network-Domain-Name.png",
-			"Debian Installer Domain Name Form", 400, 300)))
+			"Debian Installer Domain Name Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 
-	myStr = myCat2(myStr, listItemWrap("Fill out the debian installer user forms"))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"Fill out the debian installer user forms")
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Users-Root-Password.png"
@@ -228,63 +272,87 @@ def bodyGen():
 		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		"<p>This form asks for the password for the root user." + LINE_RETURN
 		+ " But Debian doesnt need a root user." + LINE_RETURN
 		+ " You can leave this field blank, " + LINE_RETURN
 		+ " and the installer will give admin privelages to the first user." + LINE_RETURN
 		+ " The default in the field is blank, which is just fine.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Users-Root-Password.png",
-			"Debian Installer Root's Password Form", 400, 300)))
-	myStr = myCat2(myStr, listItemWrap(
+			"Debian Installer Root's Password Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		"<p>This form asks for your full name." + LINE_RETURN
 		+ " The default in the field is blank, which is just fine.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Users-Full-Name.png",
-			"Debian Installer Person Full Name Form", 400, 300)))
-	myStr = myCat2(myStr, listItemWrap(
+			"Debian Installer Person Full Name Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		"<p>This form asks for the username you will have." + LINE_RETURN
 		+ " The system will most often use this to distinquish the user account." + LINE_RETURN
 		+ " It's best if it has lowercase letters." + LINE_RETURN
 		+ " Something simple like <b>debra</b> or <b>ian</b> is good.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Users-Username.png",
-			"Debian Installer Username Form", 400, 300)))
-	myStr = myCat2(myStr, listItemWrap(
+			"Debian Installer Username Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		"<p>This form asks for your user's password." + LINE_RETURN
 		+ " You will use this to log in." + LINE_RETURN
 		+ " Type the same answer twice.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		imageWrap("Debian-Installer-Users-Password.png",
-			"Debian Installer Users Password Form", 400, 300)))
+			"Debian Installer Users Password Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 
-	myStr = myCat2(myStr, listItemWrap(
-		"Fill out the debian installer forms for the computer clock."))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"Fill out the debian installer forms for the computer clock.")
 	
 	os.system("cp"
 		+ " picts/Debian-Installer-Clock-Time-Zone.png"
 		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		"<p>This form asks for the time zone." + LINE_RETURN
 		+ " The system remembers this as an offset to Greenwich Mean Time." + LINE_RETURN
 		+ " Select the correct value in the list box," + LINE_RETURN
 		+ " to configure the clock correctly.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		imageWrap("Debian-Installer-Clock-Time-Zone.png",
-			"Debian Installer Clock Time Zone Form", 400, 300)))
+			"Debian Installer Clock Time Zone Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 
-	myStr = myCat2(myStr, listItemWrap(
-		"Fill out the debian installer forms to configure partitions."))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
+		"Fill out the debian installer forms to configure partitions.")
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Disks-Partition-Strategy.png"
@@ -294,15 +362,20 @@ def bodyGen():
 		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		"<p>This form has options to configure paritions." + LINE_RETURN
 		+ " Select <b>Manual</b> in the list box." + LINE_RETURN
 		+ " This gives the most freedom.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		imageWrap("Debian-Installer-Disks-Partition-Strategy.png",
-			"Debian Installer Disks Partition Strategy Form", 400, 300)))
-	myStr = myCat2(myStr, listItemWrap(
+			"Debian Installer Disks Partition Strategy Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		"<p>This is box in which to configure partitions." + LINE_RETURN
 		+ " It can take a while to get used to these partition forms.</p>" + LINE_RETURN
 		+ "<p>Partition 1." + LINE_RETURN
@@ -326,53 +399,70 @@ def bodyGen():
 		+ "But if you decide to configure a swap paration," + LINE_RETURN
 		+ "I recommend a size of <b>1 GB</b>.</p>" + LINE_RETURN
 		+ "<p>After done, select <b>Finish partitioning and write changes to disk</b>," + LINE_RETURN
-		+ "and click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "and click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Disks-Manual.png",
-			"Debian Installer Disks Manual Configuration", 400, 300)))
+			"Debian Installer Disks Manual Configuration", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 
-	myStr = myCat2(myStr, listItemWrap(
-		"Fill out the debian installer forms for extra stuff"))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
+		"Fill out the debian installer forms for extra stuff")
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Popularity.png"
 		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		"<p>This form can enable the popularity contest for packages." + LINE_RETURN
 		+ "If you select <b>Yes</b>, then Debian will send the list" + LINE_RETURN
 		+ "of packages you have installed to their servers." + LINE_RETURN
 		+ "The Debian people use this information to order packages on their CD-s." + LINE_RETURN
 		+ "If you're worried about security, select <b>No</b>." + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		imageWrap("Debian-Installer-Popularity.png",
-			"Debian Installer Popularity Form", 400, 300)))
+			"Debian Installer Popularity Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 
-	myStr = myCat2(myStr, listItemWrap(
-		"Fill out the debian installer forms for software selection"))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"Fill out the debian installer forms for software selection")
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Software-Selection.png"
 		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		"<p>This form selects which software to install." + LINE_RETURN
 		+ "Select <b>Debian desktop environment</b>," + LINE_RETURN
 		+ "and select <b>Xfce</b>," + LINE_RETURN
 		+ "and de-select everything else." + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		imageWrap("Debian-Installer-Software-Selection.png",
-			"Debian Installer Software Selection Form", 400, 300)))
+			"Debian Installer Software Selection Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 
-	myStr = myCat2(myStr, listItemWrap(
-		"Fill out the debian installer forms related to GRUB (BIOS only)"))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
+		"Fill out the debian installer forms related to GRUB (BIOS only)")
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Grub-1.png"
@@ -382,44 +472,59 @@ def bodyGen():
 		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		"<p>Boot Sectors.  (BIOS only.)  Select <b>Yes</b> here" + LINE_RETURN
 		+ "if you want to install the GRUB environment" + LINE_RETURN
 		+ "to your hard drive, including the first sectors." + LINE_RETURN
 		+ "This wipes out whatever other boot loaders that are in place.</p>" + LINE_RETURN
 		+ "<p>Select <b>No</b> here if you have some other mechanism" + LINE_RETURN
 		+ "to load the linux kernel.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Grub-1.png",
-			"Debian Installer Grub Form 1", 400, 300)))
-	myStr = myCat2(myStr, listItemWrap(
+			"Debian Installer Grub Form 1", 400, 300))
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		"<p>Choose drive.  (BIOS only.)" + LINE_RETURN
 		+ "Select the hard drive to write to.</p>" + LINE_RETURN
 		+ "<p>You can select <b>Enter device manually</b>" + LINE_RETURN
 		+ "and specify an arbitrary path string to the drive," + LINE_RETURN
 		+ "if you want to.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b>.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr,
 		imageWrap("Debian-Installer-Grub-2.png",
-			"Debian Installer Grub Form 2", 400, 300)))
+			"Debian Installer Grub Form 2", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 
-	myStr = myCat2(myStr, listItemWrap(
-		"Finish with the debian installer"))
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
+		"Finish with the debian installer")
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Complete.png"
 		+ " docs/help/debian")
 
 	myStr = appendListBegin(myStr)
-	myStr = myCat2(myStr, listItemWrap(
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		"<p>This form marks the end of the debian installer's role.</p>" + LINE_RETURN
-		+ "<p>Click <b>Continue</b> to reboot.</p>" + LINE_RETURN))
-	myStr = myCat2(myStr, listItemWrap(
+		+ "<p>Click <b>Continue</b> to reboot.</p>" + LINE_RETURN)
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListItemBegin(myStr)
+	myStr = myCat2(myStr, 
 		imageWrap("Debian-Installer-Complete.png",
-			"Debian Installer Complete Form", 400, 300)))
+			"Debian Installer Complete Form", 400, 300))
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
+	myStr = appendListItemEnd(myStr)
 
 	myStr = appendListEnd(myStr)
 	return myStr
@@ -431,10 +536,10 @@ def main():
 	f = open("docs/help/debian/index.htm", "r+")
 	f.truncate(0)
 
-	contentmyStr = bodyGen()
-	headermyStr = ""
-	titlemyStr = "Hi there"
-	myStr = mainWrap(contentmyStr, headermyStr, titlemyStr)
+	contentMyStr = bodyGen()
+	headerMyStr = ""
+	titleMyStr = "Hi there"
+	myStr = mainWrap(contentMyStr, headerMyStr, titleMyStr)
 
 	f.write(myStr)
 	f.close()
