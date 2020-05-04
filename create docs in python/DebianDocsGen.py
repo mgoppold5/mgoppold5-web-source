@@ -80,7 +80,7 @@ def mainWrap(contentStr, headerStr, titleStr):
 	#	+ TAB + "border-style: solid;" + LINE_RETURN
 	#	+ "}" + LINE_RETURN)
 	middleStr = (
-		"@import url(docs-style.css);" + LINE_RETURN)
+		"@import url(css/docs-style.css);" + LINE_RETURN)
 	rightStr = "</style>" + LINE_RETURN
 	myStr = myCat3(leftStr, middleStr, rightStr)
 
@@ -137,17 +137,19 @@ def bodyGen():
 	myStr = myCat2(myStr, "Boot the cd or usb media")
 	
 	os.system("mkdir -p docs/help/debian")
+	os.system("mkdir -p docs/help/debian/picts")
+	os.system("mkdir -p docs/help/debian/css")
 
 	os.system("cp"
 		+ " css/docs-style.css"
-		+ " docs/help/debian")
+		+ " docs/help/debian/css")
 	
 	os.system("cp"
 		+ " picts/Debian-Boot-CD-BIOS.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	os.system("cp"
 		+ " picts/Debian-Boot-CD-UEFI.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -156,7 +158,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Boot-CD-BIOS.png", "BIOS boot screen", 320, 240))
+		imageWrap("picts/Debian-Boot-CD-BIOS.png", "BIOS boot screen", 320, 240))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
@@ -164,7 +166,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Boot-CD-UEFI.png", "UEFI boot screen", 400, 300))
+		imageWrap("picts/Debian-Boot-CD-UEFI.png", "UEFI boot screen", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
 	myStr = appendListItemEnd(myStr)
@@ -175,13 +177,13 @@ def bodyGen():
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Language-1.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	os.system("cp"
 		+ " picts/Debian-Installer-Language-2.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	os.system("cp"
 		+ " picts/Debian-Installer-Language-3.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -190,7 +192,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Language-1.png",
+		imageWrap("picts/Debian-Installer-Language-1.png",
 			"Debian Installer Language Form 1", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -199,7 +201,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Language-2.png",
+		imageWrap("picts/Debian-Installer-Language-2.png",
 			"Debian Installer Language Form 2", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -208,7 +210,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Language-3.png",
+		imageWrap("picts/Debian-Installer-Language-3.png",
 			"Debian Installer Language Form 3", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
@@ -220,10 +222,10 @@ def bodyGen():
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Network-Hostname.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	os.system("cp"
 		+ " picts/Debian-Installer-Network-Domain-Name.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -235,7 +237,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Network-Hostname.png",
+		imageWrap("picts/Debian-Installer-Network-Hostname.png",
 			"Debian Installer Hostname Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -248,7 +250,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Network-Domain-Name.png",
+		imageWrap("picts/Debian-Installer-Network-Domain-Name.png",
 			"Debian Installer Domain Name Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
@@ -260,16 +262,16 @@ def bodyGen():
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Users-Root-Password.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	os.system("cp"
 		+ " picts/Debian-Installer-Users-Full-Name.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	os.system("cp"
 		+ " picts/Debian-Installer-Users-Username.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	os.system("cp"
 		+ " picts/Debian-Installer-Users-Password.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -283,7 +285,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Users-Root-Password.png",
+		imageWrap("picts/Debian-Installer-Users-Root-Password.png",
 			"Debian Installer Root's Password Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -294,7 +296,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Users-Full-Name.png",
+		imageWrap("picts/Debian-Installer-Users-Full-Name.png",
 			"Debian Installer Person Full Name Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -307,7 +309,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Users-Username.png",
+		imageWrap("picts/Debian-Installer-Users-Username.png",
 			"Debian Installer Username Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -319,7 +321,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr, 
-		imageWrap("Debian-Installer-Users-Password.png",
+		imageWrap("picts/Debian-Installer-Users-Password.png",
 			"Debian Installer Users Password Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
@@ -331,7 +333,7 @@ def bodyGen():
 	
 	os.system("cp"
 		+ " picts/Debian-Installer-Clock-Time-Zone.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -344,7 +346,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr, 
-		imageWrap("Debian-Installer-Clock-Time-Zone.png",
+		imageWrap("picts/Debian-Installer-Clock-Time-Zone.png",
 			"Debian Installer Clock Time Zone Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
@@ -356,10 +358,10 @@ def bodyGen():
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Disks-Partition-Strategy.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	os.system("cp"
 		+ " picts/Debian-Installer-Disks-Manual.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -371,7 +373,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr, 
-		imageWrap("Debian-Installer-Disks-Partition-Strategy.png",
+		imageWrap("picts/Debian-Installer-Disks-Partition-Strategy.png",
 			"Debian Installer Disks Partition Strategy Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -403,7 +405,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Disks-Manual.png",
+		imageWrap("picts/Debian-Installer-Disks-Manual.png",
 			"Debian Installer Disks Manual Configuration", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
@@ -415,7 +417,7 @@ def bodyGen():
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Popularity.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -429,7 +431,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr, 
-		imageWrap("Debian-Installer-Popularity.png",
+		imageWrap("picts/Debian-Installer-Popularity.png",
 			"Debian Installer Popularity Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
@@ -441,7 +443,7 @@ def bodyGen():
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Software-Selection.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -454,7 +456,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr, 
-		imageWrap("Debian-Installer-Software-Selection.png",
+		imageWrap("picts/Debian-Installer-Software-Selection.png",
 			"Debian Installer Software Selection Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
@@ -466,10 +468,10 @@ def bodyGen():
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Grub-1.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 	os.system("cp"
 		+ " picts/Debian-Installer-Grub-2.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -484,7 +486,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Grub-1.png",
+		imageWrap("picts/Debian-Installer-Grub-1.png",
 			"Debian Installer Grub Form 1", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -498,7 +500,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		imageWrap("Debian-Installer-Grub-2.png",
+		imageWrap("picts/Debian-Installer-Grub-2.png",
 			"Debian Installer Grub Form 2", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
@@ -510,7 +512,7 @@ def bodyGen():
 
 	os.system("cp"
 		+ " picts/Debian-Installer-Complete.png"
-		+ " docs/help/debian")
+		+ " docs/help/debian/picts")
 
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -520,7 +522,7 @@ def bodyGen():
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr, 
-		imageWrap("Debian-Installer-Complete.png",
+		imageWrap("picts/Debian-Installer-Complete.png",
 			"Debian Installer Complete Form", 400, 300))
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)

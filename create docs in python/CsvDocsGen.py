@@ -25,6 +25,7 @@ import os
 QUOTE = "\""
 LINE_RETURN = "\n"
 TAB = "\t"
+HTML_TAB = "&nbsp;&nbsp;"
 
 def myCat3(left, middle, right):
 	myStr = ""	
@@ -73,14 +74,11 @@ def imageWrap(imgPath, altText, width, height):
 
 def appendTerminalBoxBegin(prevContent):
 	myStr = myCat2(prevContent,
-		"<div style=" + QUOTE
-		+ "border: 2pt solid black;" + LINE_RETURN
-		+ "background: #afa;"
-		+ "font-family: monospace;"
-		+ QUOTE + ">"
-		+ "<div style=" + QUOTE
-		+ "border: 2pt solid white;" + LINE_RETURN
-		+ QUOTE + ">")
+		"<div class=" + QUOTE + "terminal-box" + QUOTE + ">"
+		+ LINE_RETURN
+		+ "<div class=" + QUOTE + "white-thin-border" + QUOTE + ">"
+		+ LINE_RETURN
+		)
 	return myStr
 
 def appendTerminalBoxEnd(prevContent):
@@ -91,14 +89,11 @@ def appendTerminalBoxEnd(prevContent):
 
 def appendTextEditorBoxBegin(prevContent):
 	myStr = myCat2(prevContent,
-		"<div style=" + QUOTE
-		+ "border: 2pt solid black;" + LINE_RETURN
-		+ "background: #ffd;"
-		+ "font-family: monospace;"
-		+ QUOTE + ">"
-		+ "<div style=" + QUOTE
-		+ "border: 2pt solid white;" + LINE_RETURN
-		+ QUOTE + ">")
+		"<div class=" + QUOTE + "text-editor-box" + QUOTE + ">"
+		+ LINE_RETURN
+		+ "<div class=" + QUOTE + "white-thin-border" + QUOTE + ">"
+		+ LINE_RETURN
+		)
 	return myStr
 
 def appendTextEditorBoxEnd(prevContent):
@@ -110,13 +105,8 @@ def appendTextEditorBoxEnd(prevContent):
 def mainWrap(contentStr, headerStr, titleStr):
 	leftStr = ("<style"
 		+ " type=" + QUOTE + "text/css" + QUOTE + ">" + LINE_RETURN)
-	#middleStr = (".gray-border {" + LINE_RETURN
-	#	+ TAB + "border-width: 2px;" + LINE_RETURN
-	#	+ TAB + "border-color: #777;" + LINE_RETURN
-	#	+ TAB + "border-style: solid;" + LINE_RETURN
-	#	+ "}" + LINE_RETURN)
 	middleStr = (
-		"@import url(docs-style.css);" + LINE_RETURN)
+		"@import url(css/docs-style.css);" + LINE_RETURN)
 	rightStr = "</style>" + LINE_RETURN
 	myStr = myCat3(leftStr, middleStr, rightStr)
 
@@ -173,10 +163,11 @@ def bodyGen():
 	myStr = myCat2(myStr, "Run the CSV test of ObjectAccessNow.")
 	
 	os.system("mkdir -p docs/help/csv")
+	os.system("mkdir -p docs/help/csv/css")
 
 	os.system("cp"
 		+ " css/docs-style.css"
-		+ " docs/help/csv")
+		+ " docs/help/csv/css")
 	
 	#os.system("cp"
 	#	+ " picts/Debian-Boot-CD-BIOS.png"
@@ -188,41 +179,46 @@ def bodyGen():
 	myStr = appendListBegin(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		"<p>Open a terminal and clone the ObjectAccessNow repo.</p>")
+		"<p>Open a terminal and clone the ObjectAccessNow repo.</p>"
+		+ LINE_RETURN)
 	myStr = appendTerminalBoxBegin(myStr)
 	myStr = myCat2(myStr,
-		"COMMAND> <b>git clone https://github.com/mgoppold5/objectaccessnow</b>" + "<br>" + LINE_RETURN
-		+ "Cloning into 'objectaccessnow'..." + "<br>" + LINE_RETURN
-		+ "remote: Enumerating objects: 820, done." + "<br>" + LINE_RETURN
-		+ "remote: Counting objects: 100% (820/820), done." + "<br>" + LINE_RETURN
-		+ "remote: Compressing objects: 100% (355/355), done." + "<br>" + LINE_RETURN
-		+ "remote: Total 820 (delta 425), reused 755 (delta 360), pack-reused 0" + "<br>" +	LINE_RETURN
-		+ "Receiving objects: 100% (820/820), 356.29 KiB | 517.00 KiB/s, done." + "<br>" + LINE_RETURN
-		+ "Resolving deltas: 100% (425/425), done." + "<br>" + LINE_RETURN
-		+ "COMMAND> <b>cd objectaccessnow</b>" + "<br>" + LINE_RETURN
-		+ "COMMAND>" + "<br>" + LINE_RETURN)
+		"COMMAND> <b>git clone https://github.com/mgoppold5/objectaccessnow</b>" + "<br/>" + LINE_RETURN
+		+ "Cloning into 'objectaccessnow'..." + "<br/>" + LINE_RETURN
+		+ "remote: Enumerating objects: 820, done." + "<br/>" + LINE_RETURN
+		+ "remote: Counting objects: 100% (820/820), done." + "<br/>" + LINE_RETURN
+		+ "remote: Compressing objects: 100% (355/355), done." + "<br/>" + LINE_RETURN
+		+ "remote: Total 820 (delta 425), reused 755 (delta 360), pack-reused 0" + "<br/>" +	LINE_RETURN
+		+ "Receiving objects: 100% (820/820), 356.29 KiB | 517.00 KiB/s, done." + "<br/>" + LINE_RETURN
+		+ "Resolving deltas: 100% (425/425), done." + "<br/>" + LINE_RETURN
+		+ "COMMAND> <b>cd objectaccessnow</b>" + "<br/>" + LINE_RETURN
+		+ "COMMAND>" + "<br/>" + LINE_RETURN)
 	myStr = appendTerminalBoxEnd(myStr)
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		"<p>Move the " + QUOTE + "test java compiler csv"
-			+ QUOTE + " folder, out of the "
-			+ QUOTE + "extra" + QUOTE + " folder, into the top level repo folder.</p>")
+		"<p>Move the " + QUOTE + "test java compiler csv" + QUOTE
+            + LINE_RETURN
+			+ " folder, out of the" + LINE_RETURN
+			+ " " + QUOTE + "extra" + QUOTE + " folder," + LINE_RETURN
+            + " " + "into the top level repo folder.</p>" + LINE_RETURN)
 	myStr = appendTerminalBoxBegin(myStr)
 	myStr = myCat2(myStr,
-		"COMMAND> <b>mv " + QUOTE + "extra/test java compiler csv"
-			+ QUOTE + " .</b>" + "<br>" + LINE_RETURN
-		+ "COMMAND>" + "<br>" + LINE_RETURN)
+		"COMMAND> <b>mv"
+            + " " + QUOTE + "extra/test java compiler csv" + QUOTE + " .</b>"
+                + "<br/>" + LINE_RETURN
+		+ "COMMAND>" + "<br/>" + LINE_RETURN)
 	myStr = appendTerminalBoxEnd(myStr)
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		"<p>Make a test folder in the top level repo folder.</p>")
+		"<p>Make a test folder in the top level repo folder.</p>"
+		+ LINE_RETURN)
 	myStr = appendTerminalBoxBegin(myStr)
 	myStr = myCat2(myStr,
 		"COMMAND> <b>mkdir " + QUOTE + "test"
-			+ QUOTE + "</b>" + "<br>" + LINE_RETURN
-		+ "COMMAND>" + "<br>" + LINE_RETURN)
+			+ QUOTE + "</b>" + "<br/>" + LINE_RETURN
+		+ "COMMAND>" + "<br/>" + LINE_RETURN)
 	myStr = appendTerminalBoxEnd(myStr)
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -237,13 +233,13 @@ def bodyGen():
 	myStr = appendTerminalBoxBegin(myStr)
 	myStr = myCat2(myStr,
 		"COMMAND> <b>cp -r " + QUOTE + "test java compiler/ProjectInfo"
-			+ QUOTE + " " + QUOTE + "test" + QUOTE + "</b>" + "<br>" + LINE_RETURN
+			+ QUOTE + " " + QUOTE + "test" + QUOTE + "</b>" + "<br/>" + LINE_RETURN
 		+ "COMMAND> <b>cp -r " + QUOTE + "test java compiler/Tools"
-			+ QUOTE + " " + QUOTE + "test" + QUOTE + "</b>" + "<br>" + LINE_RETURN
+			+ QUOTE + " " + QUOTE + "test" + QUOTE + "</b>" + "<br/>" + LINE_RETURN
 		+ "COMMAND> <b>cp -r " + QUOTE + "test java compiler csv/ProjectInfo"
-			+ QUOTE + " " + QUOTE + "test" + QUOTE + "</b>" + "<br>" + LINE_RETURN
+			+ QUOTE + " " + QUOTE + "test" + QUOTE + "</b>" + "<br/>" + LINE_RETURN
 		+ "COMMAND> <b>cp -r " + QUOTE + "test java compiler csv/Tools"
-			+ QUOTE + " " + QUOTE + "test" + QUOTE + "</b>" + "<br>" + LINE_RETURN
+			+ QUOTE + " " + QUOTE + "test" + QUOTE + "</b>" + "<br/>" + LINE_RETURN
 		+ "COMMAND>" + "<br>" + LINE_RETURN)
 	myStr = appendTerminalBoxEnd(myStr)
 	myStr = appendListItemEnd(myStr)
@@ -252,24 +248,24 @@ def bodyGen():
 		"<p>Get a prompt in the " + QUOTE + "test" + QUOTE + " folder.</p>" + LINE_RETURN)
 	myStr = appendTerminalBoxBegin(myStr)
 	myStr = myCat2(myStr,
-		"COMMAND> <b>cd " + QUOTE + "test" + QUOTE + "</b>" + "<br>" + LINE_RETURN
-		+ "COMMAND>" + "<br>" + LINE_RETURN)
+		"COMMAND> <b>cd " + QUOTE + "test" + QUOTE + "</b>" + "<br/>" + LINE_RETURN
+		+ "COMMAND>" + "<br/>" + LINE_RETURN)
 	myStr = appendTerminalBoxEnd(myStr)
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
 	myStr = myCat2(myStr,
-		"<p>Set the environment variables "
-		+ QUOTE + "JDK_HOME" + QUOTE
-		+ " and " + QUOTE + "JRE_HOME" + QUOTE
+		"<p>Set the environment variables" + LINE_RETURN
+		+ " " + QUOTE + "JDK_HOME" + QUOTE + LINE_RETURN
+		+ " and " + QUOTE + "JRE_HOME" + QUOTE + LINE_RETURN
 		+ " to where your java development kit is located.</p>" + LINE_RETURN)
 	myStr = myCat2(myStr,
 		"<p>For example, in Debian, use the "
 		+ QUOTE + "/usr/lib/jvm/default-java" + QUOTE + " folder.</p>" + LINE_RETURN)
 	myStr = appendTerminalBoxBegin(myStr)
 	myStr = myCat2(myStr,
-		"COMMAND> <b>export JDK_HOME=/usr/lib/jvm/default-java</b>" + "<br>" + LINE_RETURN
-		+ "COMMAND> <b>export JRE_HOME=/usr/lib/jvm/default-java</b>" + "<br>" + LINE_RETURN
-		+ "COMMAND>" + "<br>" + LINE_RETURN)
+		"COMMAND> <b>export JDK_HOME=/usr/lib/jvm/default-java</b>" + "<br/>" + LINE_RETURN
+		+ "COMMAND> <b>export JRE_HOME=/usr/lib/jvm/default-java</b>" + "<br/>" + LINE_RETURN
+		+ "COMMAND>" + "<br/>" + LINE_RETURN)
 	myStr = appendTerminalBoxEnd(myStr)
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -278,14 +274,14 @@ def bodyGen():
 		+ QUOTE + "testMerge.py" + QUOTE
 		+ " and " + QUOTE + "testCompile.py" + QUOTE + " programs.</p>" + LINE_RETURN)
 	myStr = myCat2(myStr,
-		"<p>The merge operation copies all the files"
-		+ " from all the necessary top level folders,"
+		"<p>The merge operation copies all the files" + LINE_RETURN
+		+ " from all the necessary top level folders," + LINE_RETURN
 		+ " into the test folder, overwriting everything.</p>" + LINE_RETURN
 		+ "<p>The compile operation compiles the java source code.</p>" + LINE_RETURN)
 	myStr = appendTerminalBoxBegin(myStr)
 	myStr = myCat2(myStr,
-		"COMMAND> <b>python3 Tools/testMerge.py</b>" + "<br>" + LINE_RETURN
-		+ "COMMAND> <b>python3 Tools/testCompile.py</b>" + "<br>" + LINE_RETURN
+		"COMMAND> <b>python3 Tools/testMerge.py</b>" + "<br/>" + LINE_RETURN
+		+ "COMMAND> <b>python3 Tools/testCompile.py</b>" + "<br/>" + LINE_RETURN
 		+ "COMMAND>" + "<br>" + LINE_RETURN)
 	myStr = appendTerminalBoxEnd(myStr)
 	myStr = appendListItemEnd(myStr)
@@ -293,16 +289,17 @@ def bodyGen():
 	myStr = myCat2(myStr,
 		"<p>Now you are ready to run the test program.</p>" + LINE_RETURN
 		+ "<p>There is a program to run a command called "
-		+ QUOTE + "testCommand1.py" + QUOTE + ".</p>")
+		+ QUOTE + "testCommand1.py" + QUOTE + ".</p>"
+		+ LINE_RETURN)
 	myStr = myCat2(myStr,
-		"<p>Run off a copy of the original,"
+		"<p>Run off a copy of the original," + LINE_RETURN
 		+ " since the original gets overwritten with each merge operation.</p>" + LINE_RETURN
-		+ "<p>Now edit the copy."
-		+ " The copy will stay in the " + QUOTE + "test" + QUOTE + " folder.</p>")
+		+ "<p>Now edit the copy." + LINE_RETURN
+		+ " The copy will stay in the " + QUOTE + "test" + QUOTE + " folder.</p>" + LINE_RETURN)
 	myStr = appendTerminalBoxBegin(myStr)
 	myStr = myCat2(myStr,
-		"COMMAND> <b>cp Tools/testCommand1.py Tools/testCommandTemp.py</b>" + "<br>" + LINE_RETURN
-		+ "COMMAND>" + "<br>" + LINE_RETURN)
+		"COMMAND> <b>cp Tools/testCommand1.py Tools/testCommandTemp.py</b>" + "<br/>" + LINE_RETURN
+		+ "COMMAND>" + "<br/>" + LINE_RETURN)
 	myStr = appendTerminalBoxEnd(myStr)
 	myStr = appendListItemEnd(myStr)
 	myStr = appendListItemBegin(myStr)
@@ -311,7 +308,8 @@ def bodyGen():
 		+ " enabling the action to occur.</p>" + LINE_RETURN)
 	myStr = appendTextEditorBoxBegin(myStr)
 	myStr = myCat2(myStr,
-		"EDIT> change <b>False</b> to <b>True</b> in the <b>if</b> statement.</b>" + "<br>" + LINE_RETURN
+		"EDIT> change <b>False</b> to <b>True</b>" + LINE_RETURN
+        + " " + "in the <b>if</b> statement." + "<br/>" + LINE_RETURN
 		+ "from" + "<br/>" + LINE_RETURN
 		+ "&nbsp;&nbsp;if(False):" + "<br/>" + LINE_RETURN
 		+ "to" + "<br/>" + LINE_RETURN
@@ -324,37 +322,41 @@ def bodyGen():
 		"<p>Now run the program with the command.</p>" + LINE_RETURN)
 	myStr = appendTerminalBoxBegin(myStr)
 	myStr = myCat2(myStr,
-		"COMMAND> <b>python3 Tools/testCommandTemp.py</b>" + "<br>" + LINE_RETURN
+		"COMMAND> <b>python3 Tools/testCommandTemp.py</b>"
+            + "<br/>" + LINE_RETURN
 		+ "File: test1.csv" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;Outputing tree" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_STRING_SPAN (one)" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_COMMA (,)" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_STRING_SPAN (two)" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_COMMA (,)" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_STRING_SPAN (three)" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_LINE_RETURN (" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + "Outputing tree" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + HTML_TAB + "TOKEN_STRING_SPAN (one)"
+            + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "TOKEN_COMMA (,)" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + HTML_TAB + "TOKEN_STRING_SPAN (two)"
+            + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "TOKEN_COMMA (,)" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + HTML_TAB + "TOKEN_STRING_SPAN (three)"
+            + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "TOKEN_LINE_RETURN (" + "<br/>" + LINE_RETURN
 		+ ")" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_STRING_SPAN (four)" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_COMMA (,)" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_STRING_SPAN (five)" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;TOKEN_END_OF_STREAM" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;Outputing module info" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;module CharReader" + "<br/>" + LINE_RETURN
-		+ "&nbsp;&nbsp;&nbsp;&nbsp;module CsvBaseReader" + "<br/>" + LINE_RETURN
-		+ "COMMAND>" + "<br>" + LINE_RETURN)
+		+ HTML_TAB + HTML_TAB + "GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + HTML_TAB + "TOKEN_STRING_SPAN (four)"
+            + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "TOKEN_COMMA (,)" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "GRAM_XML_CONTENT ()" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + HTML_TAB + "TOKEN_STRING_SPAN (five)"
+            + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "TOKEN_END_OF_STREAM" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + "Outputing module info" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "module CharReader" + "<br/>" + LINE_RETURN
+		+ HTML_TAB + HTML_TAB + "module CsvBaseReader" + "<br/>" + LINE_RETURN
+		+ "COMMAND>" + "<br/>" + LINE_RETURN)
 	myStr = appendTerminalBoxEnd(myStr)
-	myStr = appendListItemEnd(myStr)
-	#myStr = appendListItemBegin(myStr)
-	#myStr = myCat2(myStr,
-	#	imageWrap("Debian-Boot-CD-BIOS.png", "BIOS boot screen", 320, 240))
-	#myStr = appendListItemEnd(myStr)
-	
 
+	myStr = appendListItemEnd(myStr)
+	myStr = appendListEnd(myStr)
+
+	myStr = appendListItemEnd(myStr)
 	myStr = appendListEnd(myStr)
 	return myStr
 
